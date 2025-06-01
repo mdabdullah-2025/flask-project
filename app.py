@@ -3,6 +3,7 @@ from ultralytics import YOLO
 import cv2
 import numpy as np
 import base64
+import os
 
 app = Flask(__name__)
 model = YOLO("best6.pt")
@@ -160,4 +161,5 @@ def predict_realtime():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))  # Render will set PORT env variable
+    app.run(host="0.0.0.0", port=port, debug=True)
